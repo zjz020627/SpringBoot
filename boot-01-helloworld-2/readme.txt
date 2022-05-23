@@ -1,46 +1,32 @@
-@SpringBootApplication
-用在主程序所对应的类上，声明这是一个SpringBoot应用
+yml
+作用：类似application.properties，可以给属性赋值，
+语法：
+● key: value；kv之间有空格
+● 大小写敏感
+● 使用缩进表示层级关系
+● 缩进不允许使用tab，只允许空格
+● 缩进的空格数不重要，只要相同层级的元素左对齐即可
+● '#'表示注释
+● 字符串无需加引号，如果要加，''与""表示字符串内容 会被 转义/不转义
 
-@RestController
-@ResponseBody和@Controller结合，既把这个类标为Controller又把方法的返回值作为内容返回而不是跳转页面
-
-@Configuration(proxyBeanMethods = false)
-proxyBeanMethods: 代理bean的方法
-    Full(proxyBeanMethods = true)、
-    Lite(proxyBeanMethods = false)
-    组件依赖
-
-用在配置类上
-如果这个类里的方法没有依赖关系则使用false，会使启动更快
-如果有则必须使用true，开启组件依赖
-
-@Import({xxx.class})
-用在配置类上，给容器中自动创建出这个类型的组件，默认组件名字就是全类名
-
-@ConditionalOnBean(name = "name")
-用方法上，当容器中有名为name的组件时这个方法才生效。
-用在配置类上，当容器中有名为name的组件时这个类的所有方法才生效。
-
-@ImportResource("classpath:beans.xml")
-用在配置类上，把resource目录下的beans.xml重新解析
-
+说明：
+要先在javabean上标注
+@ConfigurationProperties(prefix = "person")
 @Component
-@ConfigurationProperties(prefix = "mycar")
-用在javabean上，把该bean与配置文件结合，设置默认值。
-或
-@ConfigurationProperties(prefix = "mycar")
-用在javabean上
-@EnableConfigurationProperties(Car.class)
-用在配置类上，1.开启Car属性配置绑定功能 2.把Car这个组件自动注册到容器中
 
+然后在application.yml中设置属性默认值
+person:
+  k: v  #字面量写法
+  k: {k1:v1,k2:v2,k3:v3}    #对象写法
+  #或
+  k:
+  	k1: v1
+    k2: v2
+    k3: v3
 
-lombok插件
-注解创建javabean
-@Data：自动创建getset方法
-@AllArgsConstructor：自动创建全参构造器
-@NoArgsConstructor：自动创建无参构造器
-@ToString：自动创建toString方法
-
-
-dev-tools
-Ctrl+F9重新编译
+  #行内写法：  k: [v1,v2,v3] #对象写法
+  #或者
+  k:
+   - v1
+   - v2
+   - v3
