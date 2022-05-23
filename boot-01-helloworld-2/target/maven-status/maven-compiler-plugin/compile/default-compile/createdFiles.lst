@@ -1,0 +1,5 @@
+com\study\boot\MainApplication.class
+com\study\boot\controller\HelloController.class
+com\study\boot\bean\Pet.class
+com\study\boot\bean\Person.class
+META-INF\spring-configuration-metadata.json
