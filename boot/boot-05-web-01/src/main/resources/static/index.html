@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+</head>
+<body>
+<h1>test测试测试</h1>
+<a href="car/3/owner/lisi?age=18&inters=basketball&inters=game">测试@PathVariable</a>
+<form action="/save" method="post">
+    测试@RequestBody获取数据<br/>
+    用户名：<input name="userName" /><br/>
+    邮箱：<input name="email" /><br/>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
