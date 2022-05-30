@@ -1,10 +1,15 @@
 package com.study.admin.controller;
 
 import com.study.admin.bean.User;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
@@ -13,8 +18,19 @@ import javax.servlet.http.HttpSession;
  * @author RenAshbell
  * @create 2022-05-25-17:00
  */
+@Slf4j
 @Controller
-public class indexController {
+public class IndexController {
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    @ResponseBody
+    @GetMapping("/sql")
+    public String queryFromDb(){
+        Long aLong = jdbcTemplate.queryForObject("select count(*) from t_fruit", Long.class);
+        return aLong.toString();
+    }
 
     @GetMapping(value = {"/","login"})
     public String loginPage(){
