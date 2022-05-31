@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/fruitdb?useSSL=false
+    url: jdbc:mysql://localhost:3306/db_account?useSSL=false
     username: root
     password: 202517
     driver-class-name: com.mysql.jdbc.Driver
@@ -31,3 +31,10 @@ spring:
   jdbc:
     template:
       query-timeout: 3
+
+# 配置mybatis规则
+mybatis:
+#  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:  # 指定mybatis全局配置文件中的配置项
+    map-underscore-to-camel-case: true

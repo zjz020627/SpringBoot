@@ -1,6 +1,10 @@
 package com.study.admin.controller;
 
+import com.study.admin.bean.Account;
+import com.study.admin.bean.City;
 import com.study.admin.bean.User;
+import com.study.admin.service.AccountService;
+import com.study.admin.service.CityService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
@@ -24,6 +29,32 @@ public class IndexController {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    AccountService accountService;
+
+    @Autowired
+    CityService cityService;
+
+    @ResponseBody
+    @PostMapping("/city")
+    public City saveCity(City city){
+        cityService.saveCity(city);
+        return city;
+    }
+
+    @ResponseBody
+    @GetMapping("/city")
+    public City getCityById(@RequestParam("id") Long id){
+        return cityService.getById(id);
+    }
+
+    @ResponseBody
+    @GetMapping("/acct")
+    public Account getById(@RequestParam("id") Long id){
+
+        return accountService.getAcctById(id);
+    }
 
     @ResponseBody
     @GetMapping("/sql")
